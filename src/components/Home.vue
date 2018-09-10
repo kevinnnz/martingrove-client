@@ -1,15 +1,19 @@
 <template>
   <div>
-    <p>Here is some information. This is the Home page</p>
+    <h2>{{ msg }}</h2>
   </div>
 </template>
 
 <script>
   export default {
-    name: 'Home', //this is the name of the component
+    name: 'Hello',
+    data () {
+      return {
+        msg: 'Welcome to Crypto Info'
+      }
+    }
   }
 
-  console.log("Home");
 </script>
 
 <!-- Extra style -->

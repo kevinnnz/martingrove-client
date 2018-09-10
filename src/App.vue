@@ -1,19 +1,20 @@
 <template>
   <div id="app">
-    <h1>Welcome </h1>
+    <h1>Welcome</h1>
+    <router-link :to="{ name: 'Home' }">Home</router-link>
+    <router-link :to="{ name: 'Food' }">Food</router-link>
+    <router-link :to="{ name: 'Drink' }">Drink</router-link>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Home from './components/Home.vue'
-import Food from './components/Food.vue'
-import Drink from './components/Drink.vue'
-import Cart from './components/Cart.vue'
 
 export default {
   name: 'app',
   components: {
-    Cart
+    Home
   }
 }
 </script>

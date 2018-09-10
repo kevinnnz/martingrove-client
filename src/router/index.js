@@ -12,7 +12,7 @@ import Register from '../components/Register';
 import Cart from '../components/Cart';
 
 // Food and Drink menu
-import Food from '../components/Drink';
+import Food from '../components/Food';
 import Drink from '../components/Drink'
 
 Vue.use(Router);
@@ -20,7 +20,7 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/Home',
+      path: '/',
       name: 'Home',
       component: Home,
     },
