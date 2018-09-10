@@ -3,6 +3,9 @@
 ## About
 Martin Grove is built ontop of VUE.JS.
 
+### Branch 1.1
+This is the first deliverable branch.
+
 ## Project setup
 ```
 npm install
