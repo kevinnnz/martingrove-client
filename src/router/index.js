@@ -1,28 +1,29 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import HelloWorld from '@/components/HelloWorld';
+//Homepage
+import Home from '../components/Home';
 
 // Login and Register Flow
-import Login from '@/components/Login';
-import Register from '@/components/Register';
+import Login from '../components/Login';
+import Register from '../components/Register';
 
 // User Cart
-import Cart from '@/component/Cart';
+import Cart from '../components/Cart';
 
 // Food and Drink menu
-import Food from '@/component/Drink';
-import Drink from '@/component/Drink'
+import Food from '../components/Drink';
+import Drink from '../components/Drink'
 
 Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld,
-    }, 
+      path: '/Home',
+      name: 'Home',
+      component: Home,
+    },
     {
       path: '/login',
       name: 'Login',
@@ -34,7 +35,7 @@ export default new Router({
       component: Register,
     },
     {
-      path: '/cart',
+      path: '',
       name: 'Cart',
       component: Cart,
     },
