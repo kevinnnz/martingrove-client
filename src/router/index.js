@@ -13,7 +13,11 @@ import Cart from '../components/Cart';
 
 // Food and Drink menu
 import Food from '../components/Food';
-import Drink from '../components/Drink'
+import Drink from '../components/Drink';
+
+//Drink sub Menu
+import Alchol from '../components/Alchol';
+import SoftDrinks from '../components/SoftDrinks';
 
 Vue.use(Router);
 
@@ -48,6 +52,16 @@ export default new Router({
       path: '/drink',
       name: 'Drink',
       component: Drink,
+    },
+    {
+      path: '/drink/softdrinks',
+      name: 'SoftDrinks',
+      component: SoftDrinks,
+    },
+    {
+      path: '/drink/alchol',
+      name: 'Alchol',
+      component: Alchol,
     }
   ],
 });

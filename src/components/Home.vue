@@ -1,6 +1,14 @@
 <template>
-  <div>
-    <h2>{{ msg }}</h2>
+  <div class="row">
+    <div class="col s12"> 
+        <h2>{{ msg }}</h2>
+    </div>
+    <div class="col s6">
+      <p> Hello, world </p>
+    </div>
+    <div class="col s6"> 
+      <p>What's going on?</p>
+    </div>
   </div>
 </template>
 
@@ -9,7 +17,7 @@
     name: 'Home',
     data () {
       return {
-        msg: 'Welcome to Martin Grove'
+        msg: 'Welcome!'
       }
     }
   }

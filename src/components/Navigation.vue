@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2>Nav Bar</h2>
+  <div class="header">
+    <h1>Martin Grove Golf Course</h1>
     <nav>
       <router-link v-for="routes in links" 
       v-bind:key="routes.id"

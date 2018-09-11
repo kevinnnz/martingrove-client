@@ -1,0 +1,3 @@
+/*
+    This class handles the AUTHENTICATION from client to server.
+*/
