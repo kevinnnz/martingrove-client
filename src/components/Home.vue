@@ -6,10 +6,10 @@
 
 <script>
   export default {
-    name: 'Hello',
+    name: 'Home',
     data () {
       return {
-        msg: 'Welcome to Crypto Info'
+        msg: 'Welcome to Martin Grove'
       }
     }
   }

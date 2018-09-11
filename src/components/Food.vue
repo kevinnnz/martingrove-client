@@ -1,16 +1,41 @@
 <template>
-  <div>
-    <h1>Food</h1>
-    <p>Here is some information. This is the food page</p>
+<div>
+  <ul v-if="posts && posts.length">
+    <li v-for="post of posts" v-bind:key="post.id">
+      <p><strong>{{post.title}}</strong></p>
+      <p>{{post.body}}</p>
+    </li>
+  </ul>
+
+  <ul v-if="errors && errors.length">
+    <li v-for="error of errors" v-bind:key="error">
+      {{error.message}}
+    </li>
+  </ul>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'Food' //this is the name of the component
-  }
-</script>
+import axios from 'axios';
 
-<!-- Extra style -->
-<style>
-</style>
+export default {
+  data() {
+    return {
+      posts: [],
+      errors: []
+    }
+  },
+
+  // Fetches posts when the component is created.
+  created() {
+    axios.get(`http://jsonplaceholder.typicode.com/posts`)
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.posts = response.data
+    })
+    .catch(e => {
+      this.errors.push(e)
+    });
+  }
+}
+</script>

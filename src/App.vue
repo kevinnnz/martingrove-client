@@ -1,20 +1,16 @@
 <template>
   <div id="app">
-    <h1>Welcome</h1>
-    <router-link :to="{ name: 'Home' }">Home</router-link>
-    <router-link :to="{ name: 'Food' }">Food</router-link>
-    <router-link :to="{ name: 'Drink' }">Drink</router-link>
+    <Navigation></Navigation>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Home from './components/Home.vue'
-
+import Navigation from './components/Navigation'
 export default {
   name: 'app',
   components: {
-    Home
+    'Navigation': Navigation
   }
 }
 </script>
