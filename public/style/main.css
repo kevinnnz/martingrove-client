@@ -11,3 +11,31 @@
         2.1 - Martin Grove Styles
 */
 
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgba(244, 244, 244, 1);
+}
+
+.header {
+    background-color: white;
+    height: 100%;
+}
+
+nav {
+    background-color: white;
+    border-bottom: 0.5px;
+    border-bottom-color: rgba(221, 221, 221, 1);
+    border-bottom-style: solid;
+    height: 45px;
+    line-height: 45px;
+}
+
+.nav-link {
+    font-size: 16px;
+    width: 71px;
+    margin: 15px;
+}
