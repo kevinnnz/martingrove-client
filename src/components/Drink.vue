@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <h1>Drink</h1>
+  <div class="row">
+    <div class="col s12 titlecard">
+      <h1>Drink</h1>
+    </div>
     <p>Here is some information. This is the food page</p>
   </div>
 </template>

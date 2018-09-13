@@ -25,6 +25,11 @@ body {
     height: 100%;
 }
 
+.masthead {
+    text-align: center;
+    margin-bottom: -50px;
+}
+
 nav {
     background-color: white;
     border-bottom: 0.5px;
@@ -32,6 +37,7 @@ nav {
     border-bottom-style: solid;
     height: 45px;
     line-height: 45px;
+    margin-top: -20px;
 }
 
 .nav-link {
@@ -39,3 +45,23 @@ nav {
     width: 71px;
     margin: 15px;
 }
+
+.cart {
+    text-align: center;
+}
+
+.cartlabel {
+    margin-top: 40px;
+    margin-bottom: -15px;
+}
+
+.titlecard {
+    background: white;
+    border-top-color: rgba(221, 221, 221, 1);
+    border-bottom-color: rgba(221, 221, 221, 1);
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border: 0.5px;
+    text-align: center;
+}
+
