@@ -9,7 +9,29 @@
 
 <script>
   export default {
-    name: 'Drink' //this is the name of the component
+    name: 'Drink', //this is the name of the component
+    data() {
+      return {
+        drinks: [],
+        subMenu: [
+          {
+            id: 1,
+            text: 'Soft Drinks',
+            page:'/drinks/softdrinks'
+          },
+          {
+            id: 2,
+            text: 'Alcohol',
+            page: '/drinks/alchol'
+          },
+          {
+            id: 3,
+            text: 'Coffee & Tea',
+            page: '/drinks/coffeeandtes'
+          }
+        ]
+      }
+    }
   }
 </script>
 

@@ -8,7 +8,12 @@ This is the first deliverable branch.
 
 ## Project setup
 ```
-npm install
+npm install vuejs
+npm install vue-cli
+```
+
+```
+npm init
 ```
 
 ### Compiles and hot-reloads for development
