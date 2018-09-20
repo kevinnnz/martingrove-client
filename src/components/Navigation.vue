@@ -35,6 +35,16 @@ export default {
             id: 2,
             text: 'Drink',
             page: '/drink'
+        },
+        {
+            id: 3,
+            text: 'Register',
+            page: '/register'
+        },
+        {
+            id: 4,
+            text: 'Login',
+            page: '/login'
         }
       ]
     }

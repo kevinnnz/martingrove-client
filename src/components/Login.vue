@@ -1,7 +1,20 @@
 <template>
-  <div>
-    <h1>Login</h1>
-    <p>Here is some information. This is the Login page</p>
+  <div class="col-sm-4">
+    <h3>Log In</h3>
+    <form data-bind="submit: login">
+      <div class="form-group">
+        <label>Email</label>
+        <input class="form-control" type="text" data-bind="value: loginEmail"/>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input class="form-control" type="password" data-bind="value: loginPassword"/>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-default">Log In</button>
+        <button data-bind="click: logout" class="btn btn-default">Log Out</button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -10,7 +23,30 @@
     name: 'Login' //this is the name of the component
   }
 </script>
+<script>
+import axios from 'axios';
 
+export default {
+  data() {
+    return {
+      posts: [],
+      errors: []
+    }
+  },
+
+  // Fetches posts when the component is created.
+  created() {
+    axios.get(`http://jsonplaceholder.typicode.com/posts`)
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.posts = response.data
+    })
+    .catch(e => {
+      this.errors.push(e)
+    });
+  }
+}
+</script>
 <!-- Extra style -->
 <style>
 </style>
