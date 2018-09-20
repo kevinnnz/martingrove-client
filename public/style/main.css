@@ -62,6 +62,31 @@ nav {
     border-top-style: solid;
     border-bottom-style: solid;
     border: 0.5px;
+    margin-bottom: -15px;
     text-align: center;
 }
 
+.productCard {
+    width: 50%;
+    margin-top: 15px;
+    margin-left: 15px;
+    background-color: rgba(255,255,255, 1);
+    border: none;
+    box-shadow: 0px 2px 5px rgba(204, 204, 204, 0.349019);
+}
+
+.productTitle {
+    font-size: 18px;
+    color:#333333;
+}
+
+.buttonGreen {
+    color: rgb(255, 255, 255);
+    width: 140px; 
+    height: 30px;
+    font-size: 16px;
+    background-color: rgba(64, 152, 110, 1);
+    border-color: rgba(62, 150, 108, 1);
+    border-width: 2px;
+    border-style: solid;
+}

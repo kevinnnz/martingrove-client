@@ -1,40 +1,60 @@
 <template>
-  <div class="row">
-    <div class="col s12 titlecard">
-      <h1>Drink</h1>
+<div>
+    <div class="row">
+      <div class="col s12 titlecard">
+        <h1>{{ name }}</h1>
+      </div>
     </div>
-    <p>Here is some information. This is the food page</p>
+    <div class="row" v-if="products && products.length">
+      <div class="col s12 productCard" v-for="product of products" v-bind:key="product.Product.ProductId">
+        <div class="row">
+            <div class="col s6">
+              <h2 class="productTitle">{{ product.Product.ProductName }}</h2>
+              <p>${{ product.Product.ProductPrice }}</p>
+              <button type="button" class="buttonGreen" v-on:click="addToCart()">Add to Cart</button>
+            </div>
+            <div class="col s6">
+              <!-- place holder for an image -->
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" v-if="errors && errors.length">
+      <div class="col s12 productCard" v-for="error of errors" v-bind:key="error">
+        {{error.message}}
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'Drink', //this is the name of the component
-    data() {
-      return {
-        drinks: [],
-        subMenu: [
-          {
-            id: 1,
-            text: 'Soft Drinks',
-            page:'/drinks/softdrinks'
-          },
-          {
-            id: 2,
-            text: 'Alcohol',
-            page: '/drinks/alchol'
-          },
-          {
-            id: 3,
-            text: 'Coffee & Tea',
-            page: '/drinks/coffeeandtes'
-          }
-        ]
-      }
-    }
-  }
-</script>
+import axios from 'axios';
 
-<!-- Extra styling that's used for this view only -->
-<style>
-</style>
+export default {
+  data() {
+    return {
+      name: "Drinks",
+      products: [],
+      errors: []
+    }
+  },
+  methods: {
+    addToCart() {
+      // foodcart.push(this.post.id);
+      // localStorage.cart = JSON.stringify(this.foodcart);
+    }
+  },
+  // Fetches posts when the component is created.
+  created() {
+    axios.get(`https://martingrove-api.azurewebsites.net/api/productdrinks`)
+    .then(response => {
+      // JSON responses are automatically parsed.
+      this.products = response.data
+    })
+    .catch(e => {
+      this.errors.push(e)
+    });
+  }
+}
+</script>
