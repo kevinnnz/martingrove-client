@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <Navigation></Navigation>
-    <router-view></router-view>
     <Footer></Footer>
   </div>
 </template>

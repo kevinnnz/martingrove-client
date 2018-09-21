@@ -25,7 +25,6 @@ import auth from "../Shared/SharedGlobalResources.js";
 
 export default {
   data() {
-      
     return {
       userAccount: {
         username: "",

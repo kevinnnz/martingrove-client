@@ -42,6 +42,11 @@ export default new Router({
       component: Register,
     },
     {
+      path: '/logout',
+      name: 'Logout',
+      component: Logout,
+    },
+    {
       path: '',
       name: 'Cart',
       component: Cart,

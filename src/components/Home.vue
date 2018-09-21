@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col s12"> 
-        <h2>{{ msg }}</h2>
+        <h2>{{ user }}</h2>
     </div>
     <div class="col s6">
       <p> Hello, world </p>
@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script>
+<script
   export default {
     name: 'Home',
     data () {
@@ -23,7 +23,3 @@
   }
 
 </script>
-
-<!-- Extra style -->
-<style>
-</style>
