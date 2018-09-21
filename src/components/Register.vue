@@ -1,5 +1,7 @@
 <template>
-  <div class="col-sm-4">
+<div class="body">
+
+  <div class="col-sm-4" v-if="!subbmitted">
     <form>
       <h3>Register</h3>
       <div class="form-group">
@@ -15,9 +17,14 @@
         <input class="form-control" type="password" v-model="userAccount.cpassword"/>
       </div>
       <div class="form-group">
-        <button v-on:click.prevent="post" class="btn btn-default">Register</button>
+        <button v-on:click.prevent="postin" class="btn btn-default">in</button>
       </div>
     </form>
+  </div>
+<div class="col-sm-4" v-if="subbmitted"> 
+      <div class="form-group">
+        <button v-on:click.prevent="postout" class="btn btn-default">out</button>
+      </div>
   </div>
   <!--
   <div class="col-sm-4">
@@ -41,10 +48,12 @@
     </form>
   </div>
   -->
+</div>
 </template>
 
 <script>
 import axios from "axios";
+import auth from "../Shared/SharedGlobalResources.js";
 
 export default {
   data() {
@@ -58,44 +67,28 @@ export default {
     };
   },
   name: "Register", //this is the name of the component
-
   methods: {
-    post: function() {
+    postin: function() {
       axios({
         method: "post",
         url: "https://martingrove-api.azurewebsites.net/api/Account/Register",
         data: {
-            Email: this.userAccount.email,
-            Password: this.userAccount.password,
-            ConfirmPassword: this.userAccount.cpassword
+          Email: this.userAccount.email,
+          Password: this.userAccount.password,
+          ConfirmPassword: this.userAccount.cpassword
         }
-      }).then(function(data) {
-        console.log("This is the test");
-        console.log(data.status);
-        console.log(data);
-        console.log("This is the test");
-      });
+      })
+        .then(function(data) {
+          console.log(data);
+          this.subbmitted = true;
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+    },
+    postout: function() {
+      this.subbmitted = false;
     }
-
-    /* TEST POST WORKS
-
-        post: function() {
-      axios({
-        method: "post",
-        url: "https://jsonplaceholder.typicode.com/posts",
-        data: {
-            title: this.userAccount.email,
-            body: this.userAccount.password,
-            userId: 1
-        }
-      }).then(function(data) {
-        console.log("This is the test");
-        console.log(data.status);
-        console.log(data);
-        console.log("This is the test");
-      });
-    }
-    */
   }
 };
 </script>

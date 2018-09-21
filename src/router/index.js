@@ -8,6 +8,9 @@ import Home from '../components/Home';
 import Login from '../components/Login';
 import Register from '../components/Register';
 
+// Logout
+import Logout from '../components/Logout';
+
 // User Cart
 import Cart from '../components/Cart';
 

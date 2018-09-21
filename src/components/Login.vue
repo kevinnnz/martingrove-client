@@ -1,51 +1,61 @@
 <template>
-  <div class="col-sm-4">
-    <h3>Log In</h3>
-    <form data-bind="submit: login">
-      <div class="form-group">
-        <label>Email</label>
-        <input class="form-control" type="text" data-bind="value: loginEmail"/>
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input class="form-control" type="password" data-bind="value: loginPassword"/>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-default">Log In</button>
-        <button data-bind="click: logout" class="btn btn-default">Log Out</button>
-      </div>
-    </form>
+<div class="body">
+  <div class="col-sm-4" v-if="!submitted">
+       <form class="login" @submit.prevent="postin">
+     <h1>Log in</h1>
+     <label>User name</label>
+     <input required v-model="userAccount.username" type="text" placeholder="Email"/>
+     <label>Password</label>
+     <input required v-model="userAccount.password" type="password" placeholder="Password"/>
+     <hr/>
+     <button type="submit">Login</button>
+   </form>
   </div>
+<div class="col-sm-4" v-if="submitted"> 
+      <div class="form-group">
+        <button v-on:click.prevent="postout" class="btn btn-default">out</button>
+      </div>
+  </div>
+</div>
 </template>
 
 <script>
-  export default {
-    name: 'Login' //this is the name of the component
-  }
-</script>
-<script>
-import axios from 'axios';
+import axios from "axios";
+import auth from "../Shared/SharedGlobalResources.js";
 
 export default {
   data() {
+      
     return {
-      posts: [],
-      errors: []
+      userAccount: {
+        username: "",
+        password: ""
+      },
+      errors: [],
+      submitted: false,
+      tokenKey: ""
     }
   },
-
-  // Fetches posts when the component is created.
-  created() {
-    axios.get(`http://jsonplaceholder.typicode.com/posts`)
-    .then(response => {
-      // JSON responses are automatically parsed.
-      this.posts = response.data
-    })
-    .catch(e => {
-      this.errors.push(e)
-    });
+  methods: {
+    postin: function() {
+      axios({
+        method: "post",
+        url: "https://martingrove-api.azurewebsites.net/token",
+        contentType: "application/raw",
+        data: "username="+ this.userAccount.username +"&password="+this.userAccount.password+"&grant_type=password"
+      }).then(
+        (response) => {
+          this.tokenKey = response.data.access_token;
+          this.submitted = true;
+          auth.token = this.tokenKey;
+          console.log(auth.token);
+          });
+    },
+    postout: function() {
+      this.submitted = false;
+    }
   }
-}
+};
 </script>
 <!-- Extra style -->
 <style>

@@ -35,18 +35,24 @@ export default {
             id: 2,
             text: 'Drink',
             page: '/drink'
-        },
+        }
+      ],
+      accountLinks: [
         {
-            id: 3,
+            id: 0,
             text: 'Register',
             page: '/register'
         },
         {
-            id: 4,
+            id: 1,
             text: 'Login',
             page: '/login'
-        }
-      ]
+        },
+        {
+            id: 2,
+            text: 'Logout',
+            page: '/logout'
+        }]
     }
   }
 }

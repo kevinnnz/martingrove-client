@@ -2,8 +2,8 @@
 <div>
   <ul v-if="posts && posts.length">
     <li v-for="post of posts" v-bind:key="post.id">
-      <p><strong>{{post.title}}</strong></p>
-      <p>{{post.body}}</p>
+      <p><strong>{{post.firstname}}</strong></p>
+      <p>{{post.salary}}</p>
     </li>
   </ul>
 
@@ -28,7 +28,7 @@ export default {
 
   // Fetches posts when the component is created.
   created() {
-    axios.get(`http://jsonplaceholder.typicode.com/posts`)
+    axios.get(`https://martingrove-api.azurewebsites.net/api/employees`)
     .then(response => {
       // JSON responses are automatically parsed.
       this.posts = response.data
