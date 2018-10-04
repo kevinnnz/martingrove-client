@@ -5,8 +5,8 @@
         <h1>Martin Grove Golf Course</h1>
       </div>
       <div class="col s4 cart">
-        <h2 class="cartlabel" style="font-size: 16px;">My Order</h2>
-        <h2 class="items">0</h2>
+        <router-link to="/cart"><h2 class="cartlabel" style="font-size: 16px;">My Order</h2>
+        <h2 class="items">0</h2></router-link>
       </div>
     </div>
     <nav>

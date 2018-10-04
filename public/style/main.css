@@ -90,3 +90,26 @@ nav {
     border-width: 2px;
     border-style: solid;
 }
+
+.orderCart {
+    background-color: rgb(255, 255, 255);
+}
+
+.orderCard {
+    background: rgb(255, 255, 255);
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+    height: 80px;
+    border-bottom-color: rgb(224, 224, 224);
+    border-bottom-style: solid;
+    border-bottom-width: 0.5px;
+    border-top-color: rgb(224, 224, 224);
+    border-top-style: solid;
+    border-top-width: 0.5px;
+    margin-bottom: -3px;
+}
+
+.warningCard {
+    height: 200px;
+}

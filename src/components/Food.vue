@@ -41,12 +41,30 @@ export default {
   },
   methods: {
     addToCart() {
-      // coming soon
+      if (localStorage && localStorage.getItem('access_token')){
+        // if the user is logged in we'll store their cart in the database
+
+      } 
+      else {
+        if (localStorage && localStorage.getItem('cart')){
+          // if the user is not logged in we'll keep their cart safe in local storage
+          let cart = JSON.parse(localStorage.getItem(cart));
+          var product = {}
+          product.productId = "";
+          product.productName = "";
+          product.productPrice = "";
+          product.productQuantity = "";
+
+          cart.push(product);
+          localStorage.setItem(JSON.stringify(cart));
+      }
+
+      }
     }
   },
   // Fetches posts when the component is created.
   created() {
-    axios.get(`https://martingrove-api.azurewebsites.net/api/productfoods`)
+    axios.get(`https://mayfieldgolf.azurewebsites.net/api/products`)
     .then(response => {
       // JSON responses are automatically parsed.
       this.products = response.data

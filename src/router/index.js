@@ -39,7 +39,7 @@ export default new Router({
       component: Register,
     },
     {
-      path: '',
+      path: '/cart',
       name: 'Cart',
       component: Cart,
     },
