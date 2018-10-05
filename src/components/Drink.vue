@@ -5,13 +5,13 @@
         <h1>{{ name }}</h1>
       </div>
     </div>
-    <div class="row" v-if="products && products.length">
-      <div class="col s12 productCard" v-for="product of products" v-bind:key="product.Product.ProductId">
+    <div class="row" v-if="pDrink && pDrink.length">
+      <div class="col s12 productCard" v-for="product of pDrink" v-bind:key="product.ProductId">
         <div class="row">
             <div class="col s6">
-              <h2 class="productTitle">{{ product.Product.ProductName }}</h2>
-              <p>${{ product.Product.ProductPrice }}</p>
-              <button type="button" class="buttonGreen" v-on:click="addToCart()">Add to Cart</button>
+              <h2 class="productTitle">{{ product.ProductName }}</h2>
+              <p>${{ product.ProductPrice }}</p>
+              <button type="button" class="buttonGreen" v-bind:prodId="product.ProductId" v-bind:prodName="product.ProductName" v-bind:prodPrice="product.ProductPrice" v-on:click="addToCart($event)">Add to Cart</button>
             </div>
             <div class="col s6">
               <!-- place holder for an image -->
@@ -29,32 +29,90 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
+import { forEach } from "async";
 
 export default {
   data() {
     return {
-      name: "Drinks",
+      name: "Drink",
       products: [],
+      productDrinks: [],
+      pDrink: [],
       errors: []
-    }
-  },
-  methods: {
-    addToCart() {
-      // foodcart.push(this.post.id);
-      // localStorage.cart = JSON.stringify(this.foodcart);
-    }
+    };
   },
   // Fetches posts when the component is created.
   created() {
-    axios.get(`https://martingrove-api.azurewebsites.net/api/productdrinks`)
-    .then(response => {
-      // JSON responses are automatically parsed.
-      this.products = response.data
-    })
-    .catch(e => {
-      this.errors.push(e)
+    var self = this;
+    axios.all([]).then(function() {
+      self.getproductDrinks();
+      self.getProducts();
     });
+  },
+  methods: {
+    getproductDrinks: function() {
+      axios
+        .get(`https://mayfieldgolf.azurewebsites.net/api/productdrinks`)
+        .then(response => {
+          this.productDrinks = response.data;
+          console.log(this.productDrinks);
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+    },
+    getProducts: function() {
+      axios
+        .get(`https://mayfieldgolf.azurewebsites.net/api/products`)
+        .then(response => {
+          this.products = response.data;
+          this.deleteDrinks(this.products, this.productDrinks);
+          console.log(this.products);
+        })
+        .catch(e => {
+          this.errors.push(e);
+        });
+    },
+    deleteDrinks(array, array2) {
+      for (let index = 0; index < array.length; index++) {
+        for (let index2 = 0; index2 < array2.length; index2++) {
+          if (array[index].ProductId == array2[index2].ProductId) {
+            this.pDrink.push(array[index]);
+            //this.products.splice(index,1);
+            console.log(index + " " + index2);
+          }
+        }
+      }
+    },
+    addToCart(e) {
+      var product = {}
+      product.productId = e.toElement.attributes.prodId.value;
+      product.productName = e.toElement.attributes.prodName.value;
+      product.prodPrice = e.toElement.attributes.prodPrice.value;
+      product.prodQty = 1;
+
+      if (localStorage && localStorage.getItem('cart')){
+          // if the user is not logged in we'll keep their cart safe in local storage
+          let cart = JSON.parse(localStorage.getItem('cart'));
+          for (let index = 0; index < cart.length; index++) {
+            if(cart[index].productId == product.productId) {
+              cart[index].prodQty = cart[index].prodQty + 1;
+              localStorage.setItem("cart", JSON.stringify(cart));
+              alert(product.productName + " added to cart!");
+              return;
+            }
+          }
+          cart.push(product);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          alert(product.productName + " added to cart!");
+      } else {
+        let cart = [];
+        cart.push(product);
+        localStorage.setItem("cart",JSON.stringify(cart));
+        alert(product.productName + " added to cart!");
+      }
   }
-}
+  }
+};
 </script>

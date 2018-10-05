@@ -6,7 +6,7 @@
       </div>
       <div class="col s4 cart">
         <router-link to="/cart"><h2 class="cartlabel" style="font-size: 16px;">My Order</h2>
-        <h2 class="items">0</h2></router-link>
+        <h2 class="items">{{ getCounter }}</h2></router-link>
       </div>
     </div>
     <nav>
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+// import { store } from './store/store'
+
 export default {
   name: 'Navigation',
   data() {
@@ -36,7 +38,8 @@ export default {
             text: 'Drink',
             page: '/drink'
         }
-      ]
+      ],
+      cart: []
     }
   }
 }
