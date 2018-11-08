@@ -15,13 +15,13 @@ import Cart from '../components/Cart';
 import Food from '../components/Food';
 import Drink from '../components/Drink';
 
-//Drink sub Menu
-import Alchol from '../components/Alchol';
-import SoftDrinks from '../components/SoftDrinks';
+import FoodMenu from '../components/FoodMenu';
 
 Vue.use(Router);
 
 export default new Router({
+  linkActiveClass: 'active',
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -54,14 +54,10 @@ export default new Router({
       component: Drink,
     },
     {
-      path: '/drink/softdrinks',
-      name: 'SoftDrinks',
-      component: SoftDrinks,
-    },
-    {
-      path: '/drink/alchol',
-      name: 'Alchol',
-      component: Alchol,
+      path: '/:menu',
+      name: 'Menu',
+      component: FoodMenu,
+      props: true
     }
   ],
 });

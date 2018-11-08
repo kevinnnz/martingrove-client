@@ -15,6 +15,12 @@ export default {
   components: {
     'Navigation': Navigation,
     'Footer': Footer
+  },
+  created(){
+    if(localStorage && localStorage.getItem('cart')) {
+      this.$store.state.cart = JSON.parse(localStorage.cart);
+      this.$store.commit('calculateQtyCounter');
+    }
   }
 }
 </script>

@@ -8,8 +8,7 @@
 </template>
 
 <script>
-  import axios from 'axios';
-  import qs from 'qs' ;
+import authenticationservice from '@/services/authenticationservice'
 
   export default {
     name: 'Login', //this is the name of the component
@@ -18,34 +17,19 @@
                 input: {
                     username: "",
                     password: ""
-                }
+                },
+                loggedin: false
             }
     },
     methods: {
       login() {
-        if(this.input.username != "" && this.input.password != "") {
-          const data = qs.stringify({ 
-            grant_type: 'password',            
-            user: this.input.username, 
-            password: this.input.password
-          });
-
-          const endpoint = "https://martingrove-api.azurewebsites.net/token";
-
-          const headers = {
-            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-          };
-
-          axios.post(endpoint, data, headers).then(function(response){
-            localStorage.setItem("access_token", response.access_token);
-            localStorage.setItem("user", response.userName);
-          }).catch(function(error){
-            debugger;
-            console.log(error);
-          });
-        }
+        // call the authentication
+        authenticationservice.login().then(response => {
+          this.loggedin = response;
+        });
       }
     }
+        
   }
 </script>
 

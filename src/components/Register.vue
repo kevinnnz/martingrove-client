@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Register</h1>
+    <h1>Sign-Up</h1>
     <p>Here is some information. This is the Register page</p>
   </div>
 </template>
