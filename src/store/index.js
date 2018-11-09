@@ -6,9 +6,13 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         cart: [],
+        pricesArray: [],
         cartCounter: 0,
         estimatedTime: 0,
-        subTotal: 0.00
+        subtotal: 0.00,
+        tax: 0.00,
+        gratuity: 0.00,
+        total: 0.00
     },
     getters: {
         cart: state => {
@@ -19,20 +23,14 @@ export default new Vuex.Store({
         writeCartToLocalStorage(){
             // save the cart to the local storage
             localStorage.setItem("cart", JSON.stringify(this.state.cart));
+            localStorage.setItem("subtotal", JSON.stringify(this.state.subtotal));
         },
         assembleCart({dispatch, commit}, payload){
             var product = payload;
             commit('addProductToCart', product);
             commit('calculateQtyCounter');
+            commit('setSubTotal');
             dispatch('writeCartToLocalStorage');
-            dispatch('calculateTotal');
-        },
-        calculateTotal() {
-            for (let i = 0; i < this.state.cart.length; i++) {
-                const element = this.state.cart[i];
-                this.state.subTotal = element + this.state.subTotal;
-                this.dispatch('calculateTime', element);
-            }
         },
         calculateTime(state, payload) { 
             // figure out a method for this.............
@@ -49,9 +47,13 @@ export default new Vuex.Store({
         },
         removeProductFromCart(state, payload) {
             state.cart.splice(payload, 0);
+            this.dispatch('writeCartToLocalStorage');
         },
         calculateQtyCounter(state) {
             this.state.cartCounter = state.cart.length;
         },
+        removeFromPriceArray(state, payload) {
+            state.pricesArray.splice(payload, 1);
+        }
     }
 });

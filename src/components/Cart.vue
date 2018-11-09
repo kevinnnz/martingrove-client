@@ -36,17 +36,17 @@
       </div>
       <div class="col s6">
           <h3>Sub Total:</h3>
-          <h3>$16.50</h3>
+          <h3>${{ calculateSubtotal }}</h3>
       </div>
       <div class="col s6">
         <button type="button" class="buttonOutline">ADD MORE</button>
       </div>
       <div class="col s6">
-        <button type="button" class="buttonBigGreen">CHECKOUT</button>
+        <button type="button" class="buttonBigGreen" v-on:click="goToCheckout">CHECKOUT</button>
       </div>
     </div>
      <div class="row ordercart" v-else>
-      <div class="col s12">
+      <div class="col s12 productCard">
         <h2><em>There are no products in your cart..</em></h2>
       </div>
     </div>
@@ -58,33 +58,42 @@
     data(){
       return {
         name:'Cart',
-        products: [],
-        subTotal: 10.00
+        products: this.$store.getters.cart,
+        pricesArray: [],
       }
     },
     computed: {
         pickupTime() {
-          return this.$store.state.estimatedTime;
+          return 10;
+          //return this.$store.state.estimatedTime;
+        },
+        calculateSubtotal()  {
+          return this.pricesArray.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr))
         }
     },
     created() {
-      // quick setup of the cart
-      this.products = this.$store.getters.cart;
+      // setting up prices array
+      this.products.forEach(product => {
+        this.pricesArray.push(product.productPrice);
+      });
     },
     methods: {
-      calculateSubTotal() {
-        let subTotal = 0.00;
-
-        return this.subTotal = subTotal;
-      }, 
       removeProduct(e) {
         let index = e.toElement.attributes.index.value;
         this.products.splice(index, 1);
+        this.pricesArray.splice(index, 1);
         this.$store.commit('removeProductFromCart', index);
         this.$store.commit('calculateQtyCounter');
         this.$store.dispatch('writeCartToLocalStorage');
 
         // display a confirmation message
+      },
+      goToCheckout() {
+        this.$store.state.subtotal = this.calculateSubtotal;
+        this.$store.state.tax = parseFloat((this.$store.state.subtotal * 0.13).toFixed(2));
+        this.$store.state.gratuity = parseFloat((this.$store.state.subtotal * 0.15).toFixed(2))
+        this.$store.state.total = this.$store.state.subtotal + this.$store.state.tax + this.$store.state.gratuity;
+        this.$router.push('Checkout');
       }
     }
   }

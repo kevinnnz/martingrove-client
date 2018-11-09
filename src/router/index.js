@@ -16,6 +16,8 @@ import Food from '../components/Food';
 import Drink from '../components/Drink';
 
 import FoodMenu from '../components/FoodMenu';
+import Checkout from '../components/Checkout';
+
 
 Vue.use(Router);
 
@@ -54,10 +56,15 @@ export default new Router({
       component: Drink,
     },
     {
+      path: '/checkout',
+      name: 'Checkout',
+      component: Checkout,
+    },
+    {
       path: '/:menu',
       name: 'Menu',
       component: FoodMenu,
       props: true
-    }
+    },
   ],
 });

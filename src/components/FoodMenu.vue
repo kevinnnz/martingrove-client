@@ -14,7 +14,7 @@
               <button type="button" class="buttonGreen" v-bind:prodId="product.ProductId" v-bind:prodName="product.ProductName" v-bind:prodPrice="product.ProductPrice" v-on:click="addToCart($event)">Add to Cart</button>
             </div>
             <div class="col s6">
-              <!-- place holder for an image -->
+              <p>{{ product.ProductDescription }}</p>
             </div>
         </div>
       </div>
