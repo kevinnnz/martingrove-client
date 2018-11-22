@@ -7,7 +7,7 @@ export default {
     },
     // getting categories from the database
     getMenus(){
-        return axios.get("http://mayfieldgolfapi.azurewebsites.net/api/menus");
+        return axios.get("https://mayfieldgolfapi.azurewebsites.net/api/menus");
     },
     getOpenOrder() {
         return axios.get("openOrder");

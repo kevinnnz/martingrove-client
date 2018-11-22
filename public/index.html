@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="<%= BASE_URL %>style/main.css">
     <link rel="stylesheet" type="text/css" href="<%= BASE_URL %>style/materialize.css">
     <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
     <title>Martin Grove Gold Course</title>
   </head>
   <body>
@@ -17,6 +18,18 @@
     <div id="app" class="container">
 
     </div>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAChrFd_ZmR_H4_x1Jkzxc8R1mY7Jcbis0",
+        authDomain: "martingrove-359bb.firebaseapp.com",
+        databaseURL: "https://martingrove-359bb.firebaseio.com",
+        projectId: "martingrove-359bb",
+        storageBucket: "martingrove-359bb.appspot.com",
+        messagingSenderId: "451321816496"
+      };
+      firebase.initializeApp(config);
+    </script>    
     <!-- built files will be auto injected -->
   </body>
 </html>

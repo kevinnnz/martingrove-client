@@ -1,36 +1,26 @@
-import axios from 'axios';
-import qs from 'qs' ;
-import user from '@/models/user';
-
 export default {
-    data(){
-        return{
-            user
-        }
-    },
-    methods: { 
-        login(username, password) {
-            if(username != "" && password != "") {
-              const data = qs.stringify({ 
-                grant_type: 'password',            
-                user: this.input.username, 
-                password: this.input.password
-              });
-    
-              const endpoint = "mayfieldgolf.azurewebsites.net/token";
-    
-              const headers = {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-              };
-    
-              axios.post(endpoint, data, headers).then(function(response){
-                localStorage.setItem("access_token", response.access_token);
-                this.user = new user(response.username, response.email, response.firstname, response.lastname);
-                return true;
-              }).catch(function(error){
-                return error;
-              });
-            }
-        }
+  validatePasswords(password, confpassword){
+    if( password === confpassword ) {
+      return true;
+    } else {
+      return false;
     }
+  },
+  validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  },
+  validateSignUp(email, password, confpassword, firstname, lastname, phonenumber){
+    let emptyFields = [];
+    
+    if( email == "" ) { emptyFields.push("Email is required."); }
+    if( password == "" ) { emptyFields.push("Password is required."); }
+    if( confpassword == "" ) { emptyFields.push("Password is required."); }
+    if( firstname == "" ) { emptyFields.push("First Name is required."); }
+    if( lastname == "" ) { emptyFields.push("Last Name is required."); }
+    if( phonenumber == "" ) { emptyFields.push("Phonenumber is required."); }
+
+    return emptyFields;
+
+  }
 }

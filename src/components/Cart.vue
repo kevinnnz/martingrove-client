@@ -64,17 +64,16 @@
     },
     computed: {
         pickupTime() {
-          return 10;
-          //return this.$store.state.estimatedTime;
+          return this.$store.state.estimatedTime;
         },
         calculateSubtotal()  {
-          return this.pricesArray.reduce((acc, curr) => parseFloat(acc) + parseFloat(curr))
+          return this.pricesArray.reduce((acc, curr) => (parseFloat(acc) + parseFloat(curr)).toFixed(2));
         }
     },
     created() {
       // setting up prices array
       this.products.forEach(product => {
-        this.pricesArray.push(product.productPrice);
+        this.pricesArray.push(product.productPrice).toFixed(2);
       });
     },
     methods: {

@@ -2,6 +2,7 @@
 <div>
     <div class="row">
       <div class="col s12 titlecard">
+        <flash-message ></flash-message>
         <h1>{{ name }}</h1>
       </div>
     </div>
@@ -33,6 +34,7 @@
 //import { forEach } from "async";
 import apiservices from '@/services/apiservices';
 import Product from '@/models/product';
+require('vue-flash-message/dist/vue-flash-message.min.css');
 
 export default {
   data() {
@@ -61,13 +63,17 @@ export default {
   methods: {
     addToCart(e) {
       // adding product to cart
-      let productId = e.toElement.attributes.prodId.value;
-      let productName = e.toElement.attributes.prodName.value;
-      let productPrice = e.toElement.attributes.prodPrice.value;
-      let productQty = 1;
-      let product = new Product(productId, productName, productPrice, productQty);
+      let product = new Product(
+        e.toElement.attributes.prodId.value, 
+        e.toElement.attributes.prodName.value, 
+        e.toElement.attributes.prodPrice.value,
+        1);
       this.$store.dispatch('assembleCart', product);
+
       // display success message! You did it!!
+      this.flash(product.productName + ' added to cart', 'success', {
+          timeout: 1000,      
+      });
     }
   }
 }

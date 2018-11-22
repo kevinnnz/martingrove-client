@@ -1,44 +1,17 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-
 //Homepage
 import Home from '../components/Home';
-
-// Login and Register Flow
-import Login from '../components/Login';
-import Register from '../components/Register';
-
-// User Cart
 import Cart from '../components/Cart';
-
-// Food and Drink menu
 import Food from '../components/Food';
 import Drink from '../components/Drink';
-
 import FoodMenu from '../components/FoodMenu';
 import Checkout from '../components/Checkout';
+import Signup from '../components/Signup';
 
-
-Vue.use(Router);
-
-export default new Router({
-  linkActiveClass: 'active',
-  mode: 'history',
-  routes: [
+export const routes = [
     {
       path: '/',
       name: 'Home',
       component: Home,
-    },
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login,
-    },
-    {
-      path: '/register',
-      name: 'Register',
-      component: Register,
     },
     {
       path: '/cart',
@@ -61,10 +34,14 @@ export default new Router({
       component: Checkout,
     },
     {
+      path: '/signup',
+      name: 'Signup',
+      component: Signup,
+    },
+    {
       path: '/:menu',
       name: 'Menu',
       component: FoodMenu,
       props: true
     },
-  ],
-});
+  ];

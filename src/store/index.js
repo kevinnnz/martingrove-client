@@ -1,5 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import Firebase from "firebase";
+// import { stat } from "fs";
 
 Vue.use(Vuex);
 
@@ -7,16 +9,25 @@ export default new Vuex.Store({
     state: {
         cart: [],
         pricesArray: [],
+        openOrders: [],
         cartCounter: 0,
-        estimatedTime: 0,
+        estimatedTime: 17,
         subtotal: 0.00,
         tax: 0.00,
         gratuity: 0.00,
-        total: 0.00
+        total: 0.00,
+        user: null,
+        customer: null
     },
     getters: {
         cart: state => {
             return state.cart;
+        },
+        getUser: state => {
+            return state.user;
+        },
+        getCustomer: state => {
+            return state.customer;
         }
     },
     actions: {
@@ -39,6 +50,9 @@ export default new Vuex.Store({
             } else {
                 return state.estimatedTime = 5 + state.estimatedTime;
             }
+        },
+        setUser: context => {
+            context.commit('setUser');
         }
     }, 
     mutations: {
@@ -54,6 +68,12 @@ export default new Vuex.Store({
         },
         removeFromPriceArray(state, payload) {
             state.pricesArray.splice(payload, 1);
+        },
+        setUser: state => {
+            state.user = Firebase.auth().currentUser;
+        },
+        setCustomer(state, payload) {
+            state.customer = payload;
         }
     }
 });
