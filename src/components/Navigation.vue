@@ -2,7 +2,7 @@
   <div class="header">
     <div class="row masthead">
       <div class="col s8">
-        <img src="../assets/mayfield_logo.jpeg" alt="The Felice Brothers" style="width:50%;">
+        <img src="../assets/mayfield_logo.jpeg" alt="The Mayfield Logo" style="width:50%;">
       </div>
       <div class="col s4 cart">
         <router-link to="/cart"><h2 class="cartlabel" style="font-size: 16px;">My Order</h2>
@@ -13,8 +13,9 @@
       </div>
     </div>
     <nav>
-      <!-- Add a settings link if the user is logged in or not -->
       <router-link class="nav-link" v-for="routes in links" v-bind:key="routes.id" :to="`${routes.page}`" :params="routes.text" exact>{{routes.text}}</router-link>
+      <router-link class="nav-link" v-if="this.$store.state.user" to="/logout">Logout</router-link>
+      <router-link class="nav-link" v-else to="/login">Login</router-link>
     </nav>
   </div>
 </template>
@@ -39,7 +40,7 @@ export default {
             id: 2,
             text: 'Drink',
             page: '/drink'
-        }
+        },
       ],
     } 
   },

@@ -1,6 +1,7 @@
 /* eslint-disable */
 export default class Customer {
-    constructor(firstname, lastname, phonenumber, token){
+    constructor(uid, firstname, lastname, phonenumber, token){
+        this.uid = uid;
         this.firstname = firstname;
         this.lastname = lastname;
         this.phonenumber = phonenumber;

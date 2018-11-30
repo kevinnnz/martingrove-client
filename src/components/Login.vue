@@ -2,7 +2,7 @@
 <div>
   <div class="row">
     <div class="col s12 titlecard">
-      <h1>Login</h1>
+      <h1>{{ name }}</h1>
     </div>
   </div>
 
@@ -26,7 +26,7 @@
         <div class="after"></div>
       </fieldset>
       <button type="button" class="buttonBigGreen" v-on:click="signInUser">LOGIN</button>
-      <h4 style="text-align:center;"><em>Or Sign-Up...</em></h4>
+      <h4 style="text-align:center;" v-on:click="showSignUp"><em>Or Sign-Up...</em></h4>
     </div>
   </div>
 
@@ -36,10 +36,15 @@
 <script>
 import authenticationservice from '@/services/authenticationservice';
 import Firebase from "firebase";
+import axios from 'axios';
+import Customer from '@/models/customer';
 
 export default {
   name: 'Home',
   data () {
+    return {
+      name: 'Login'
+    }
   },
   methods : {
     signInUser: function() {
@@ -59,13 +64,19 @@ export default {
       Firebase.auth().signInWithEmailAndPassword(email, password)
         .then(
           user => {
-            this.$router.replace('/');
+            axios.get('https://mayfieldgolfapi.azurewebsites.net/api/CustAccounts/' + user.uid).then(response => {
+              return this.$store.state.customer = new customer(response.UserId, response.FirstName, response.LastName, response.PhoneNumber, response.Token);
+            });
           },
           error => {
             alert(error.message);
           }
       );
 
+      this.$router.replace('/');
+    }, 
+    showSignUp() {
+      this.$router.replace('/signup');
     }
   }
 }

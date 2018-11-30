@@ -16,11 +16,17 @@ export default {
     'Navigation': Navigation,
     'Footer': Footer
   },
+  methods: {
+    setUser: function() {
+      this.$store.dispatch('setUser');
+    }
+  },
   created(){
     if(localStorage && localStorage.getItem('cart')) {
       this.$store.state.cart = JSON.parse(localStorage.cart);
       this.$store.commit('calculateQtyCounter');
     }
+    this.setUser();
   }
 }
 </script>

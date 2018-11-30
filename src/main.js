@@ -36,19 +36,19 @@ const router = new VueRouter({
 // Check before each page load whether the page requires authentication/
 // if it does check whether the user is signed into the web app or
 // redirect to the sign-in page to enable them to sign-in
-/*
+
 router.beforeEach((to, from, next) => {
   const currentUser = Firebase.auth().currentUser;
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
   if (requiresAuth && !currentUser) {
-    next('/sign-in');
-  } else if (requiresAuth && currentUser) {
-    next();
+    next({
+      path: '/login',
+      query: { redirect: to.fullPath }
+    });
   } else {
     next();
   }
-}); */
-
+}); 
 
 /* eslint-disable no-new */
 Firebase.auth().onAuthStateChanged(function (user) {

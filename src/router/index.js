@@ -6,6 +6,8 @@ import Drink from '../components/Drink';
 import FoodMenu from '../components/FoodMenu';
 import Checkout from '../components/Checkout';
 import Signup from '../components/Signup';
+import Login from '../components/Login';
+import Logout from '../components/Logout';
 
 export const routes = [
     {
@@ -39,9 +41,19 @@ export const routes = [
       component: Signup,
     },
     {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
+      path: '/logout',
+      name: 'Logout',
+      component: Logout
+    },
+    {
       path: '/:menu',
       name: 'Menu',
       component: FoodMenu,
-      props: true
+      props: true,
     },
   ];

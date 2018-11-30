@@ -89,9 +89,9 @@
       },
       goToCheckout() {
         this.$store.state.subtotal = this.calculateSubtotal;
-        this.$store.state.tax = parseFloat((this.$store.state.subtotal * 0.13).toFixed(2));
-        this.$store.state.gratuity = parseFloat((this.$store.state.subtotal * 0.15).toFixed(2))
-        this.$store.state.total = this.$store.state.subtotal + this.$store.state.tax + this.$store.state.gratuity;
+        this.$store.state.tax = parseFloat((this.$store.state.subtotal * 0.13)).toFixed(2);
+        this.$store.state.gratuity = parseFloat((this.$store.state.subtotal * 0.15)).toFixed(2);
+        this.$store.state.total = (parseFloat(this.$store.state.subtotal) + parseFloat(this.$store.state.tax) + parseFloat(this.$store.state.gratuity)).toFixed(2);
         this.$router.push('Checkout');
       }
     }

@@ -7,12 +7,12 @@
       </div>
     </div>
     <div class="row" v-if="this.products && this.products.length">
-      <div class="col s12 productCard" v-for="product of this.products" v-bind:key="product.ProductId">
+      <div class="col s12 productCard" v-for="product of this.products" v-bind:key="product.productId">
         <div class="row">
             <div class="col s6">
-              <h2 class="productTitle">{{ product.ProductName }}</h2>
+              <h2 class="productTitle">{{ product.productName }}</h2>
               <p>${{ product.ProductPrice }}</p>
-              <button type="button" class="buttonGreen" v-bind:prodId="product.ProductId" v-bind:prodName="product.ProductName" v-bind:prodPrice="product.ProductPrice" v-on:click="addToCart($event)">Add to Cart</button>
+              <button type="button" class="buttonGreen" v-bind:prodId="product.ProductId" v-bind:prodName="product.ProductName" v-bind:prodPrice="product.ProductPrice" v-bind:prodType="product.ProductType" v-on:click="addToCart($event)">Add to Cart</button>
             </div>
             <div class="col s6">
               <p>{{ product.ProductDescription }}</p>
@@ -67,7 +67,17 @@ export default {
         e.toElement.attributes.prodId.value, 
         e.toElement.attributes.prodName.value, 
         e.toElement.attributes.prodPrice.value,
+        // product Quanity is always 1
         1);
+
+        if (e.toElement.attributes.prodType.value === "Food") {
+          // im sure theres a more logical way to do this... oh well :) 
+          this.$store.state.estimatedTime = this.$store.state.estimatedTime + 17;
+        } else {
+          // no need to add more time for more drinks
+          this.$store.state.estimatedTime = 5;
+        }
+      
       this.$store.dispatch('assembleCart', product);
 
       // display success message! You did it!!

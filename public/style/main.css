@@ -42,7 +42,7 @@ nav {
 }
 
 .nav-link {
-    font-size: 16px;
+    font-size: 24px;
     line-height: 45px;
     width: 71px;
     margin: 15px;
@@ -67,6 +67,17 @@ nav {
 .cartlabel {
     margin-top: 40px;
     margin-bottom: -15px;
+    color: rgba(62, 150, 108, 1); 
+}
+
+a {
+    text-decoration: none;
+    color: rgba(62, 150, 108, 1);
+}
+
+a:visited { 
+    text-decoration: none;
+    color: rgba(62, 150, 108, 1);
 }
 
 .titlecard {
@@ -259,4 +270,9 @@ input:focus ~ .after {
   .fade-enter, .fade-leave-to {
     opacity: 0;
   }
-  
+
+.welcomeCard {
+    background-image: url("../ZE-Imagesplash_X.png");
+    background-repeat: no-repeat;
+    background-color: black;
+}

@@ -51,14 +51,17 @@
 
 <script>
 import authenticationservice from '@/services/authenticationservice';
-import Firebase from "firebase";
-import Customer from '@/models/customer'
+import Firebase,{ auth } from "firebase";
+import Customer from '@/models/customer';
+import axios from "axios";
 require('vue-flash-message/dist/vue-flash-message.min.css');
 
 
 export default {
-  name: 'Home',
   data () {
+    return { 
+      name: 'Home',
+    }
   },
   methods : {
     signUpUser: function() {
@@ -67,7 +70,8 @@ export default {
       const confpassword = this.$refs.confpassword.value;
       const firstname = this.$refs.firstname.value;
       const lastname = this.$refs.lastname.value;
-      const phonenumber = this.$refs.phonenumber.value;
+      const phonenumber = this.$refs.phonenumber.value.toString();
+      const uid = "";
 
       let emptyFields = authenticationservice.validateSignUp(email, password, confpassword, firstname, lastname, phonenumber);
       if(emptyFields.length != 0) {
@@ -88,19 +92,34 @@ export default {
         return this.flash("Password's do not match", "error");
       }
 
-      Firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(
-          user => {
-            //TODO: Build UserAccount for the
-            const customer = new Customer(email, firstname, lastname, phonenumber);
-            this.$store.commit.setCustomer(customer);
-            this.$router.replace('/');
-          },
-          error => {
-            this.flash(error.message, "error");
-          }
-      );
-
+      Firebase.auth().createUserWithEmailAndPassword(email, password).then(response => {
+        return axios({
+                    method: 'Post',
+                    url: 'https://mayfieldgolfapi.azurewebsites.net/api/CustAccounts',
+                    headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    data : {
+                      FirstName : firstname, 
+                      LastName : lastname, 
+                      Token : response.uid,
+                      PhoneNumber : phonenumber,
+                    }
+        }).then(response => {
+          // set store
+          return this.$store.commit('setCustomer', response);
+        }).catch(error => {
+          this.flash(error.message, "error");
+        })
+      }).catch(error => {
+        this.flash(error.message, "error");
+      });
+      
+      // go home..
+      // this.$router.replace('/');
+    }, 
+    showLogin() {
+      this.$router.replace('/login');
     }
   }
 }

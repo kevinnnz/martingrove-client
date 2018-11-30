@@ -9,7 +9,7 @@ export default new Vuex.Store({
     state: {
         cart: [],
         pricesArray: [],
-        openOrders: [],
+        ordersArray: [],
         cartCounter: 0,
         estimatedTime: 17,
         subtotal: 0.00,
@@ -17,7 +17,7 @@ export default new Vuex.Store({
         gratuity: 0.00,
         total: 0.00,
         user: null,
-        customer: null
+        customer: "Kevin"
     },
     getters: {
         cart: state => {
@@ -63,6 +63,9 @@ export default new Vuex.Store({
             state.cart.splice(payload, 0);
             this.dispatch('writeCartToLocalStorage');
         },
+        setTotal(state) {
+            this.state.total = parseFloat(state.subtotal) + parseFloat(state.tax) + parseFloat(state.gratuity);
+        },
         calculateQtyCounter(state) {
             this.state.cartCounter = state.cart.length;
         },
@@ -74,6 +77,9 @@ export default new Vuex.Store({
         },
         setCustomer(state, payload) {
             state.customer = payload;
+        }, 
+        setOrder(state, payload) {
+            state.ordersArray.push(payload);
         }
     }
 });

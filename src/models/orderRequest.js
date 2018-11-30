@@ -1,11 +1,11 @@
 export default class OrderRequest { 
-    constructor(userId, productIds, subtotal, tax, gratuity, token) {
+    constructor(userId, products, subtotal, tax, gratuity, orderId) {
         this.userId = userId,
-        this.productIds = productIds,
+        this.products = products,
         this.subtotal = subtotal, 
         this.tax = tax, 
         this.gratuity = gratuity
-        this.total = subtotal + tax + gratuity,
-        this.token = token
+        this.total = parseFloat(subtotal) + parseFloat(tax) + parseFloat(gratuity),
+        this.orderId = orderId
     }
 }

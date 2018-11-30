@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export default {
   validatePasswords(password, confpassword){
     if( password === confpassword ) {
@@ -22,5 +24,10 @@ export default {
 
     return emptyFields;
 
+  },
+  signUpUserOnBackend(customerDetails){
+    return axios.post('https://mayfieldgolfapi.azurewebsites.net/api/CustAccount', {
+      customer: JSON.stringify(customerDetails)
+    });
   }
 }
