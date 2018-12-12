@@ -10,7 +10,7 @@
   <div class="row" v-if="this.$store.state.customer">
     <div class="col s12 productCard" v-if="this.ordersArr && this.ordersArr.length">
       <h3> {{ orderNumber }} </h3>
-      <p v-for="order of this.$store.state.ordersArray" v-bind:key="order.product.productId"> 
+      <p v-for="order of this.ordersArr" v-bind:key="order.product.productId"> 
         {{ order.products.productName }} 
       </p>
       <p>{{ order.total }}</p>

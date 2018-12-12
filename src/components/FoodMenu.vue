@@ -7,10 +7,10 @@
       </div>
     </div>
     <div class="row" v-if="this.products && this.products.length">
-      <div class="col s12 productCard" v-for="product of this.products" v-bind:key="product.productId">
+      <div class="col s12 productCard" v-for="product of this.products" v-bind:key="product.ProductId">
         <div class="row">
             <div class="col s6">
-              <h2 class="productTitle">{{ product.productName }}</h2>
+              <h2 class="productTitle">{{ product.ProductName }}</h2>
               <p>${{ product.ProductPrice }}</p>
               <button type="button" class="buttonGreen" v-bind:prodId="product.ProductId" v-bind:prodName="product.ProductName" v-bind:prodPrice="product.ProductPrice" v-bind:prodType="product.ProductType" v-on:click="addToCart($event)">Add to Cart</button>
             </div>

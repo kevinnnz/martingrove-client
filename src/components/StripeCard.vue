@@ -80,6 +80,7 @@ export default {
 
         axios.post('https://mayfieldgolfapi.azurewebsites.net/api/OrderRequests/Post', requestBody, config)
         .then(response => {
+
             return axios({
                 method: 'post',
                 url: 'https://mayfieldgolfapi.azurewebsites.net/api/Orders/',
@@ -87,13 +88,13 @@ export default {
                     CustId: 3,
                     OrderStatus: 1
                 }
-            }).then(response => { 
+            }).then(orderResponse => { 
                 return axios({
                     method: 'post',
                     url: 'https://mayfieldgolfapi.azurewebsites.net/api/Invoices',
                     data : {
                         UserId: 3,
-                        OrderId: this.response.orderId,
+                        OrderId: orderResponse.OrderId,
                         PaymentStatus: "Completed",
                         DateCreated: new Date(),
                         TotalBeforeTax: this.$store.state.subtotal,
@@ -102,13 +103,13 @@ export default {
                         TotalAfterTax: orderTotal,
                         EstimatedTime: this.$store.state.estimatedTime
                     }
-                }).then(response => {
+                }).then(invoiceResponse => {
                     for (let i = 0; i < productIds.length; i++) {
                         axios({
                             method: 'post',
                             url: 'https://mayfieldgolfapi.azurewebsites.net/api/OrderItems',
                             data : {
-                                OrderId : this.response.orderId,
+                                OrderId : invoiceResponse.orderId,
                                 ProductId : productIds[i]
                             }
                         }).catch(error => { alert(error)}); 
@@ -120,7 +121,7 @@ export default {
                         tax : this.$store.state.tax, 
                         gratuity : this.$store.state.gratuity,
                         total : this.$store.state.subtotal + this.$store.state.tax + this.$store.state.gratuity,
-                        orderId : response.orderId
+                        orderId : invoiceResponse.orderId
                     };
                     this.$store.commit('setOrder', orderToBeCompleted);
                     this.$store.state.cart = [];
